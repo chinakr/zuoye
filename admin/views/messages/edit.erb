@@ -1,7 +1,61 @@
+<% @title = '修改作业_作业管理' %>
+
+<% content_for :include do %>
+<link href="/kindeditor/default.css" rel="stylesheet" type="text/css" />
+<script src="/kindeditor/kindeditor-min.js" type="text/javascript"></script>
+<script src="/kindeditor/zh_CN.js" type="text/javascript"></script>
+<% end %>
+
+<% content_for :breadcrumb do %>
+<li><a href="/admin/messages">作业管理</a></li>
+<li class="active">修改作业</li>
+<% end %>
+
+<% content_for :javascript do %>
+<script type="text/javascript">
+  $('li.messages').addClass('active')
+</script>
+<script>
+  var editor;
+  KindEditor.ready(function(K) {
+    editor = K.create('textarea[id="content_editor"]', {
+      allowFileManager : true
+    });
+    K('input[name=getHtml]').click(function(e) {
+      alert(editor.html());
+    });
+    K('input[name=isEmpty]').click(function(e) {
+      alert(editor.isEmpty());
+    });
+    K('input[name=getText]').click(function(e) {
+      alert(editor.text());
+    });
+    K('input[name=selectedHtml]').click(function(e) {
+      alert(editor.selectedHtml());
+    });
+    K('input[name=setHtml]').click(function(e) {
+      editor.html('<h3>Hello KindEditor</h3>');
+    });
+    K('input[name=setText]').click(function(e) {
+      editor.text('<h3>Hello KindEditor</h3>');
+    });
+    K('input[name=insertHtml]').click(function(e) {
+      editor.insertHtml('<strong>插入HTML</strong>');
+    });
+    K('input[name=appendHtml]').click(function(e) {
+      editor.appendHtml('<strong>添加HTML</strong>');
+    });
+    K('input[name=clear]').click(function(e) {
+      editor.html('');
+    });
+  });
+</script>
+<% end %>
+
 <ul class="nav nav-tabs">
-  <li> <%= link_to tag_icon(:list, pat(:list)), url(:messages, :index) %></li>
-  <li> <%= link_to tag_icon(:plus, pat(:new)), url(:messages, :new) %></li>
-  <li class="active"> <%= link_to tag_icon(:edit, pat(:edit)), url(:messages, :edit, :id => @message.id) %></li>
+  <li> <%= link_to tag_icon(:list, pat('所有作业')), url(:messages, :index) %></li>
+  <li> <%= link_to tag_icon(:plus, pat('发布作业')), url(:messages, :new) %></li>
+  <li class="active"> <%= link_to tag_icon(:edit, pat('修改作业')), url(:messages, :edit, :id => @message.id) %></li>
 </ul>
 <div class="tabs-content">
   <% form_for :message, url(:messages, :update, :id => @message.id), :method => :put, :class => 'form-horizontal' do |f| %>

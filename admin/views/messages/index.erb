@@ -12,8 +12,8 @@
 <% end %>
 
 <ul class="nav nav-tabs">
-  <li class=active> <%= link_to tag_icon(:list, pat(:list)), url(:messages, :index) %></li>
-  <li> <%= link_to tag_icon(:plus, pat(:new)), url(:messages, :new) %></li>
+  <li class=active> <%= link_to tag_icon(:list, pat('所有作业')), url(:messages, :index) %></li>
+  <li> <%= link_to tag_icon(:plus, pat('发布作业')), url(:messages, :new) %></li>
 </ul>
 <div class=tabs-content>
   <table id=list class="table table-striped table-hover table-condensed">
