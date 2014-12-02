@@ -1,64 +1,82 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="zh-cmn-Hans">
   <head>
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <meta name=viewport content='width=device-width,initial-scale=1' />
-    <title><%= @title.present? ? "#{@title} | Padrino Admin" : "Padrino Admin" %></title>
-    <%= favicon_tag "favicon.ico" %>
-    <link href='http://fonts.googleapis.com/css?family=Varela' rel=stylesheet />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= [@title, '做作业'].compact.join(' | ') %></title>
+    <meta name="description" content="<%= @description %>" />
+    <meta name="keywords" content="<%= @keywords %>" />
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <%= stylesheet_link_tag 'bootstrap', 'application' %>
+    <%= yield_content :include %>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <%= javascript_include_tag 'html5shiv.min', 'respond.min' %>
+    <![endif]-->
   </head>
   <body>
-    <div class="navbar navbar-fixed-top">
-      <div class=navbar-inner>
-        <div class=container>
-          <%= link_to 'Padrino', url(:base, :index), :class => 'navbar-brand', :title => 'Padrino Admin' %>
-          <ul class="nav navbar-nav pull-right">
-            <li class=navbar-edit-account><%= link_to tag_icon(:user), url(:accounts, :edit, :id => current_account.id), :title => pat(:profile), :class => 'navbar-nav-link' %></li>
-            <li class=navbar-logout>
-              <%= button_to(:logout, url(:sessions, :destroy), :method => :delete, :class => 'navbar-nav-form') { content_tag :button, tag_icon(:'power-off'), :type => :submit, :title => pat(:logout), :class => 'navbar-nav-form-link' } %>
-            </li>
-          </ul>
-
-          <ul class="nav navbar-nav pull-left">
-            <% project_modules.each do |project_module| %>
-              <% if request.path_info =~ /^#{project_module.path}/ %>
-                <li class="navbar-module active">
-              <% else %>
-                <li class=navbar-module>
-              <% end %>
-                <%= link_to project_module.human_name, url(project_module.path) %>
-                </li>
-            <% end %>
-          </ul>
+    <div class="container">
+      <div class="header">
+        <div class="row">
+          <div class="col-xs-12 logo">
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar">
+                    <span class="sr-only">导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="/admin">做作业</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-navbar">
+                  <ul class="nav navbar-nav pull-right">
+                    <li class=navbar-edit-account><%= link_to tag_icon(:user), url(:accounts, :edit, :id => current_account.id), :title => pat(:profile), :class => 'navbar-nav-link' %></li>
+                    <li class=navbar-logout>
+                      <%= button_to(:logout, url(:sessions, :destroy), :method => :delete, :class => 'navbar-nav-form') { content_tag :button, tag_icon(:'power-off'), :type => :submit, :title => pat(:logout), :class => 'navbar-nav-form-link' } %>
+                    </li>
+                  </ul>
+                  <ul class="nav navbar-nav pull-left">
+                    <li class="navbar-module messages"><a href="/admin/messages">作业管理</a></li>
+                    <li class="navbar-module home"><a href="/admin">使用说明</a></li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-xs-12">
+            <ol class="breadcrumb">
+              <span class="active">当前位置:&nbsp;&nbsp;</span>
+              <li><a href="/admin">管理后台</a></li>
+              <%= yield_content :breadcrumb %>
+            </ol>
+          </div>
+        </div>
+        <div class="row">
+          <div class="main">
+            <div class="col-xs-12">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="row">
+          <div class="col-xs-12 copyright">
+            <p class="text-center">&copy; 2014 chinakr 版权所有<span class="hidden-xs"> | 京ICP备12013637号-1</span></p>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class='container main'>
-      <div class='main-wrapper'>
-        <%= {:error => 'danger', :warning => 'warning', :success => 'success', :notice => 'info'}.map { |type, class_name| flash_tag(type, :class => "alert alert-#{class_name} fade in", :bootstrap => true) }.join.html_safe %>
-        <div class='row'><%= yield %></div>
-        <div class='main-wrapper-push'></div>
-      </div>
-    </div>
-
-    <footer>
-      <div class='footer-wrapper container'>
-        <p class='pull-left'>Copyright &copy; 2014 Your Site - Powered by Padrino v.0.12.4</p>
-        <ul class='pull-right footer-links'>
-          <li><%= link_to tag_icon(:home, 'web'), 'http://www.padrinorb.com', :target => :_blank, :class => 'footer-links-link' %></li>
-          <li><%= link_to tag_icon(:heart, 'blog'), 'http://www.padrinorb.com/blog', :target => :_blank, :class => 'footer-links-link' %></li>
-          <li><%= link_to tag_icon(:github, 'code'), 'https://github.com/padrino/padrino-framework', :target => :_blank, :class => 'footer-links-link' %></li>
-          <li><%= link_to tag_icon(:twitter, 'twitter'), 'http://twitter.com/padrinorb', :target => :_blank, :class => 'footer-links-link' %></li>
-        </ul>
-      </div>
-    </footer>
-
-    <%= javascript_include_tag 'jquery-1.11.0.min', (Padrino.env == :production ? 'bootstrap/bootstrap.min' : %w[bootstrap/affix bootstrap/alert bootstrap/button bootstrap/carousel bootstrap/collapse bootstrap/dropdown  bootstrap/tooltip bootstrap/transition  bootstrap/modal bootstrap/popover bootstrap/scrollspy bootstrap/tab]), :application %>
+    <script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+    <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
+    <%= javascript_include_tag 'application' %>
+    <%= yield_content :javascript %>
   </body>
 </html>

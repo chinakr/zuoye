@@ -1,3 +1,16 @@
+<% @title = '作业管理' %>
+
+
+<% content_for :breadcrumb do %>
+<li class="active">作业管理</li>
+<% end %>
+
+<% content_for :javascript do %>
+<script type="text/javascript">
+  $('li.messages').addClass('active')
+</script>
+<% end %>
+
 <ul class="nav nav-tabs">
   <li class=active> <%= link_to tag_icon(:list, pat(:list)), url(:messages, :index) %></li>
   <li> <%= link_to tag_icon(:plus, pat(:new)), url(:messages, :new) %></li>
