@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= [@title, '做作业'].compact.join(' | ') %></title>
+    <meta name="description" content="<%= @description %>" />
+    <meta name="keywords" content="<%= @keywords %>" />
+    <%= stylesheet_link_tag 'bootstrap.min', 'application' %>
+    <%= yield_content :include %>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <%= javascript_include_tag 'html5shiv.min', 'respond.min' %>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="row">
+          <div class="col-xs-12 logo">
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar">
+                    <span class="sr-only">导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="/">做作业</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-navbar">
+                  <ul class="nav navbar-nav">
+                    <li class="today"><a href="/">今天的作业</a></li>
+                    <li class="yesterday"><a href="/yesterday">昨天的作业</a></li>
+                    <li class="earlier"><a href="/earlier">更早的作业</a></li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-xs-12">
+            <ol class="breadcrumb">
+              <span class="active">当前位置:&nbsp;&nbsp;</span>
+              <li><a href="/">做作业</a></li>
+              <%= yield_content :breadcrumb %>
+            </ol>
+          </div>
+        </div>
+        <div class="row">
+          <div class="main">
+            <div class="col-xs-12">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="row">
+          <div class="col-xs-12 copyright">
+            <p class="text-center">&copy; 2014 chinakr 版权所有<span class="hidden-xs"> | 京ICP备12013637号-1</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= javascript_include_tag 'jquery.min', 'bootstrap.min', 'application' %>
+    <%= yield_content :javascript %>
+  </body>
+</html>
