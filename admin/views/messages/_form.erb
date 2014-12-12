@@ -3,31 +3,30 @@
   <%= f.label :content, :caption => '作业内容', :class => 'control-label' %>
   <div class='controls'>
     <%= f.text_area :content, :id => 'content_editor', :class => 'form-control input-xlarge input-with-feedback', :autofocus => true %>
-    <span class='help-inline'><%= error ? f.error_message_on(:content) : "Ex: a simple text" %></span>
+    <span class='help-inline'><%= error ? f.error_message_on(:content) : '' %></span>
   </div>
 </fieldset>
 <% error = @message.errors.include?(:pubdate) %>
 <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-  <%= f.label :pubdate, :caption => '日期', :class => 'control-label' %>
+  <%= f.label :pubdate, :caption => '作业日期', :class => 'control-label' %>
   <div class='controls'>
     <%= f.text_field :pubdate, :class => 'form-control input-xlarge input-with-feedback' %>
-    <span class='help-inline'><%= error ? f.error_message_on(:pubdate) : "Ex: a simple text" %></span>
+    <span class='help-inline'><%= error ? f.error_message_on(:pubdate) : '' %></span>
   </div>
 </fieldset>
 <% error = @message.errors.include?(:account_id) %>
 <fieldset class='control-group <%= error ? 'has-error' : ''%>'>
-  <%= f.label :account_id, :class => 'control-label' %>
   <div class='controls'>
-    <%= f.text_field :account_id, :class => 'form-control input-xlarge input-with-feedback' %>
-    <span class='help-inline'><%= error ? f.error_message_on(:account_id) : "Ex: a simple text" %></span>
+    <%= f.hidden_field :account_id, :value => current_account.id, :class => 'form-control input-xlarge input-with-feedback' %>
   </div>
+  <p></p>
 </fieldset>
 
 
 <div class="form-actions">
-  <%= f.submit pat(:save), :class => 'btn btn-primary' %>
+  <%= f.submit pat(:save), :class => 'btn btn-primary', :value => '保存' %>
   &nbsp;
-  <%= f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue' %>
+  <%= f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue', :value => '保存并继续' %>
   &nbsp;
-  <%= link_to pat(:cancel), url(:messages, :index), :class => 'btn btn-default' %>
+  <%= link_to '取消', url(:messages, :index), :class => 'btn btn-default' %>
 </div>
