@@ -1,7 +1,7 @@
 Zuoye::Admin.controllers :messages do
   get :index do
     @title = "Messages"
-    @messages = Message.all
+    @messages = Message.all.order('pubdate desc, id desc')
     render 'messages/index'
   end
 
