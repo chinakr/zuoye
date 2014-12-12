@@ -68,7 +68,7 @@
           <td class=list-column> <%= message.id %> </td>
           <td class=list-column> <%= message.content[0..20] %> </td>
           <td class=list-column> <%= message.pubdate %> </td>
-          <td class=list-column> <%= message.account_id %> </td>
+          <td class=list-column> <%= message.account.email %> </td>
           <td class=list-column> <%= time_ago_in_words message.created_at %></td>
           <td class=list-column> <%= time_ago_in_words message.updated_at %></td>
           <td class="list-column list-row-action">
