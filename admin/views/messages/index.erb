@@ -49,7 +49,7 @@
             </ul>
           </div>
         </th>
-                <th class=header>ID</th>
+                <th class=header>序号</th>
                 <th class=header>作业内容</th>
                 <th class=header>作业日期</th>
                 <th class=header>发布人</th>
@@ -60,12 +60,12 @@
     </thead>
 
     <tbody>
-      <% @messages.each do |message| %>
+      <% @messages.each_with_index do |message, index| %>
         <tr class=list-row>
           <td class="list-column list-selectable">
             <%= check_box_tag 'message_ids[]', :value => message.id, :class => 'list-selectable-checkbox' %>
            </td>
-          <td class=list-column> <%= message.id %> </td>
+          <td class=list-column> <%= index+1 %> </td>
           <td class=list-column> <%= message.content[0..20] %> </td>
           <td class=list-column> <%= message.pubdate %> </td>
           <td class=list-column> <%= message.account.email %> </td>
