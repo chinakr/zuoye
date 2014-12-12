@@ -1,0 +1,27 @@
+<% content_for :include do %>
+  <style>
+    .well h2 {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+  </style>
+<% end %>
+
+<% content_for :breadcrumb do %>
+  <li class="active">所有作业</li>
+<% end %>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $('li.all').addClass('active')
+  </script>
+<% end %>
+
+<% @messages.each do |message| %>
+  <div class="well">
+    <h2><span class="glyphicon glyphicon-camera"></span>&nbsp;&nbsp;<%= message.pubdate %>&nbsp;&nbsp;<%= weekday message.pubdate %></h2>
+    <%= message.content.html_safe %>
+  </div>
+<% end %>

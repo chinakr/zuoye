@@ -1,0 +1,25 @@
+<% content_for :include do %>
+  <style>
+    h2 {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+  </style>
+<% end %>
+
+<% content_for :breadcrumb do %>
+  <li class="active"><%= @date[0...4] %></li>
+<% end %>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    $('li.today').addClass('active')
+  </script>
+<% end %>
+
+<div class="well">
+  <h2><span class="glyphicon glyphicon-star-empty"></span> <%= @date %> <span class="glyphicon glyphicon-star-empty"></span></h2>
+  <%= @message.content.html_safe %>
+</div>
