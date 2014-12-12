@@ -8,6 +8,7 @@ Zuoye::Admin.controllers :messages do
   get :new do
     @title = pat(:new_title, :model => 'message')
     @message = Message.new
+    @message.pubdate = Date.today
     render 'messages/new'
   end
 
