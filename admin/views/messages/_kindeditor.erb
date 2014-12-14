@@ -4,7 +4,10 @@
     editor = K.create('textarea[id="content_editor"]', {
       width: '100%', 
       designMode: true,
-      allowFileManager: true
+      allowFileManager: true, 
+      items: [
+        'fontsize', '|', 'forecolor', 'hilitecolor', '|', 'bold', 'underline', 'strikethrough', '|', 'link', 'unlink', '|', 'undo', 'redo', '|', 'selectall', 'copy', 'cut', 'paste', '|', 'source', '|', 'fullscreen'
+      ]
     });
     K('input[name=getHtml]').click(function(e) {
       alert(editor.html());
