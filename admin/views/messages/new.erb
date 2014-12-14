@@ -1,56 +1,21 @@
 <% @title = '发布作业_作业管理' %>
 
 <% content_for :include do %>
-<link href="/kindeditor/default.css" rel="stylesheet" type="text/css" />
-<script src="/kindeditor/kindeditor-min.js" type="text/javascript"></script>
-<script src="/kindeditor/zh_CN.js" type="text/javascript"></script>
+  <link href="/kindeditor/default.css" rel="stylesheet" type="text/css" />
+  <script src="/kindeditor/kindeditor-min.js" type="text/javascript"></script>
+  <script src="/kindeditor/zh_CN.js" type="text/javascript"></script>
 <% end %>
 
 <% content_for :breadcrumb do %>
-<li><a href="/admin/messages">作业管理</a></li>
-<li class="active">发布作业</li>
+  <li><a href="/admin/messages">作业管理</a></li>
+  <li class="active">发布作业</li>
 <% end %>
 
 <% content_for :javascript do %>
-<script type="text/javascript">
-  $('li.messages').addClass('active')
-</script>
-<script>
-  var editor;
-  KindEditor.ready(function(K) {
-    editor = K.create('textarea[id="content_editor"]', {
-      width: '100%', 
-      allowFileManager: true
-    });
-    K('input[name=getHtml]').click(function(e) {
-      alert(editor.html());
-    });
-    K('input[name=isEmpty]').click(function(e) {
-      alert(editor.isEmpty());
-    });
-    K('input[name=getText]').click(function(e) {
-      alert(editor.text());
-    });
-    K('input[name=selectedHtml]').click(function(e) {
-      alert(editor.selectedHtml());
-    });
-    K('input[name=setHtml]').click(function(e) {
-      editor.html('<h3>Hello KindEditor</h3>');
-    });
-    K('input[name=setText]').click(function(e) {
-      editor.text('<h3>Hello KindEditor</h3>');
-    });
-    K('input[name=insertHtml]').click(function(e) {
-      editor.insertHtml('<strong>插入HTML</strong>');
-    });
-    K('input[name=appendHtml]').click(function(e) {
-      editor.appendHtml('<strong>添加HTML</strong>');
-    });
-    K('input[name=clear]').click(function(e) {
-      editor.html('');
-    });
-  });
-</script>
+  <script type="text/javascript">
+    $('li.messages').addClass('active')
+  </script>
+  <%= partial 'messages/kindeditor' %>
 <% end %>
 
 <ul class="nav nav-tabs">
