@@ -19,7 +19,8 @@
   var editor;
   KindEditor.ready(function(K) {
     editor = K.create('textarea[id="content_editor"]', {
-      allowFileManager : true
+      width: '100%', 
+      allowFileManager: true
     });
     K('input[name=getHtml]').click(function(e) {
       alert(editor.html());
@@ -57,7 +58,7 @@
   <li class="active"> <%= link_to tag_icon(:plus, pat('发布作业')), url(:messages, :new) %></li>
 </ul>
 <div class="tabs-content">
-  <% form_for :message, url(:messages, :create), :class => 'form-horizontal' do |f| %>
+  <% form_for :message, url(:messages, :create), :role => 'form' do |f| %>
     <%= partial 'messages/form', :locals => { :f => f } %>
  <% end %>
 </div>
