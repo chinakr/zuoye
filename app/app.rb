@@ -7,6 +7,8 @@ module Zuoye
 
     enable :sessions
 
+    set :server, :puma
+
     ##
     # Caching support.
     #

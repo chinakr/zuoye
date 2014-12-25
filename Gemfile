@@ -33,6 +33,10 @@ gem 'padrino', '0.12.4'
 #   gem 'padrino-' + g, '0.12.4'
 # end
 
+# Deployment
 gem 'capistrano', '~> 3.3.0'
 gem 'capistrano-rvm'
 gem 'capistrano-bundler', '~> 1.1.2'
+
+# App Server
+gem 'puma'
