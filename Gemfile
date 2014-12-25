@@ -32,3 +32,7 @@ gem 'padrino', '0.12.4'
 # %w(core support gen helpers cache mailer admin).each do |g|
 #   gem 'padrino-' + g, '0.12.4'
 # end
+
+gem 'capistrano', '~> 3.3.0'
+gem 'capistrano-rvm'
+gem 'capistrano-bundler', '~> 1.1.2'
